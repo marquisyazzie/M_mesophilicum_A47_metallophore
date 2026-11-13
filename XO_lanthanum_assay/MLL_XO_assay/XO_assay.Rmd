@@ -1,0 +1,184 @@
+---
+title: "Mo titration of brucebactin (Room temperature, 24 hours)"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+author: "Marquis Yazzie"
+date: "September 22 2025"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+
+
+```
+
+```{r, include=FALSE}
+library(ggplot2)
+library(stringr)
+library(data.table)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(reshape)     
+library(gplots)
+library(pheatmap)
+library(heatmap3)
+library(magrittr) 
+library(tibble) 
+library(RColorBrewer)
+library(paletteer)
+library(clr)
+library(tidyverse) 
+library(KODAMA) # to use the normalisation function
+library(ggrepel) #mainly used to repel overlapping text labels in ggplots
+library(vegan) #popular library for analysing ecological diversity and for multivariate analysis of community data. Here, we use it for PCoA
+library(svglite) #to save the plots in support vector graphics (svg) format
+library(factoextra) #for extracting and visualizing outputs of multivariate analyses such as PCA, k-means
+library(ggsci) #provides color palettes for ggplot2 that can be used for scientific journals
+library(matrixStats) #contains highly optimized functions to perform statistics on matrix data
+library(cowplot) #efficient functions to arrange several plots
+library(knitr)
+library(rmarkdown)
+```
+
+# Data cleanup
+
+Transpose chromatograms. Merge two chromatograms.. Merge metadata and chromatogram.
+
+```{r}
+chroma <- read.csv("XO_MLL_assay.csv", header=T, check.names=F)
+md <- read.csv("metadata.csv", header=T, check.names=F)
+
+```
+
+```{r}
+
+#colnames(chroma) <- gsub("RawData - ", "", colnames(chroma))
+
+
+column_nams <- as.list(colnames(chroma))
+```
+
+```{r}
+df_long <- pivot_longer(chroma, cols = -Ln_equivalencies, names_to = "Filename", values_to = "Max_Absorbance")
+print(colnames(df_long))
+```
+
+```{r}
+df_merged <- left_join(df_long, md[, c("Filename", "Sample")], by = "Filename")
+
+```
+
+
+
+chromatogram
+
+```{r}
+plot_list <- lapply(unique(df_merged$La_equivalence), function(la_eq) {
+  
+  ggplot(
+    subset(df_merged, La_equivalence == la_eq),
+    aes(x = Wavelength_nm, 
+        y = Absorbance, 
+        color = Sample_Type,
+        shape = Sample_Type)
+  ) +
+    geom_point(size = 0.5) +
+    
+    labs(
+      x = "Wavelength (nm)",
+      y = "Absorbance (AU)",
+      title = paste("La Equivalence:", la_eq)
+    ) +
+    
+    theme_classic() +
+    
+    theme(
+      axis.title.x = element_text(
+        family = "sans", size = 16, hjust = 0.5
+      ),
+      axis.title.y = element_text(
+        family = "sans", size = 16, hjust = 0.5
+      ),
+      axis.text.x = element_text(
+        family = "sans", size = 16, color = "black"
+      ),
+      axis.text.y = element_text(
+        family = "sans", size = 16, color = "black"
+      ),
+      axis.line = element_line(linewidth = 1),
+      axis.ticks = element_line(linewidth = 1),
+      axis.ticks.length = unit(.25, "cm"),
+      legend.text = element_text(
+        size = 14, family = "sans"
+      )
+    )
+})
+
+plot_list[[1]]
+plot_list[[2]]
+plot_list[[3]]
+plot_list[[4]]
+plot_list[[5]]
+plot_list[[6]]
+plot_list[[7]]
+plot_list[[8]]
+
+for (i in 1:8) {
+  
+  ggsave(
+    filename = paste0("La_equivalence_", i, ".png"),
+    plot = plot_list[[i]],
+    width = 8,
+    height = 6,
+    dpi = 300
+  )
+}
+```
+
+## Max absorbance plot
+
+```{r}
+
+
+df_max <- data.frame(df_merged)
+
+
+df_max_summary <- df_max %>%
+  group_by(Ln_equivalencies, Sample) %>%
+  summarise(
+    avg_max_absorbance = mean(Max_Absorbance, na.rm = TRUE),
+    sd_max_absorbance  = sd(Max_Absorbance, na.rm = TRUE)
+  )
+
+```
+
+```{r}
+max_abs_plot_combined <- ggplot(df_max_summary, aes(x = Ln_equivalencies, y = avg_max_absorbance, shape=Sample)) + 
+  geom_point(size = 3)  +
+  geom_errorbar(aes(ymin = avg_max_absorbance - sd_max_absorbance,
+                    ymax = avg_max_absorbance + sd_max_absorbance),
+                width = 0.05, size = 0.4) + 
+  geom_text(aes(label = Ln_equivalencies), vjust = -1)+
+  labs(x = "La equivalence",  
+       y = "Max absorbance at 575nm (AU)") +
+theme_classic()+
+   theme(axis.title.x = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.title.y = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.text.x = element_text(family = "sans", size = 16, color = "black"), 
+        axis.text.y = element_text(family = "sans", size = 16, color= "black"),
+        axis.line=element_line(size =1),
+        axis.ticks=element_line(size=1), 
+        axis.ticks.length=unit(.25, "cm"),
+        legend.text=element_text(size=14,family="sans"))
+plot(max_abs_plot_combined )
+
+ggsave(file="XO_MLL_1equivalency_10222026.svg", plot=max_abs_plot_combined, width =6, height = 5 )
+```
+
