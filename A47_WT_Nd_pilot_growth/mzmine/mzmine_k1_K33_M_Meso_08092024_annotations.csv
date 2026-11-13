@@ -1,0 +1,4 @@
+id,compound_name,adduct,score,precursor_mz,ion_mobility,ccs,rt,mol_formula,smiles,inchi,inchi_key,method
+72565,LPC 18:1,[M+H]+,0.747,522.3554160860909,,,,C26H52NO7P,,,,matchedlipid
+74257,PC 36:2,[M+H]+,0.711,786.600731730091,,,,C44H84NO8P,,,,matchedlipid
+74552,PC 36:2,[M+H]+,0.621,786.600731730091,,,,C44H84NO8P,,,,matchedlipid
