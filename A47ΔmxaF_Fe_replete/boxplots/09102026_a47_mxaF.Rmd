@@ -1,0 +1,271 @@
+---
+title: "08092024_M_Meso_metallophore_discovery"
+output: pdf_document
+date: "2024-07-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set working drive
+
+```{r}
+
+```
+
+## Load in neccesary packages
+
+```{r}
+library(ggplot2)
+library(stringr)
+library(data.table)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(reshape)     
+library(gplots)
+library(pheatmap)
+library(heatmap3)
+library(magrittr) 
+library(tibble) 
+library(RColorBrewer)
+library(paletteer)
+library(clr)
+library(tidyverse) #used for data science. The eight core packages inside this library are: ggplot2 (data visualisation), dplyr (data manipulation), tidyr, readr, purrr, tibble, stringr, and forcats
+library(KODAMA) # to use the normalisation function
+library(ggrepel) #mainly used to repel overlapping text labels in ggplots
+library(vegan) #popular library for analysing ecological diversity and for multivariate analysis of community data. Here, we use it for PCoA
+library(svglite) #to save the plots in support vector graphics (svg) format
+library(factoextra) #for extracting and visualizing outputs of multivariate analyses such as PCA, k-means
+library(ggsci) #provides color palettes for ggplot2 that can be used for scientific journals
+library(matrixStats) #contains highly optimized functions to perform statistics on matrix data
+library(cowplot) #efficient functions to arrange several plots
+```
+
+## Load in Data
+
+### Normalized quant file
+
+```{r}
+quant <- read.csv("09012026_A47mxaF_Ln_limitation_iimn_gnps_quant.csv", header=T, check.names=F)
+
+```
+
+### Metadata
+
+```{r}
+md <- read.csv("metadata.csv", header = T, check.names = F, sep = ',')
+```
+
+## Cleanup code
+
+### Transpose the quant table
+
+```{r}
+quant <- t(quant)
+quant <- as.data.frame(quant)
+
+new_colnames <- as.character(quant[1, ])
+quant <- quant[-1,]
+
+colnames(quant) <- new_colnames
+
+quant <- quant[grep(".mzML", rownames(quant)), ]
+
+
+```
+
+```{r}
+numeric_columns <- sapply(quant, is.numeric)
+numeric_columns
+
+convert_to_numeric <- function(column) {
+  as.numeric(as.character(column))
+}
+
+# Apply the function to all columns
+quant <- quant %>% mutate_all(convert_to_numeric)
+```
+
+```{r}
+quant <- quant %>% tibble::rownames_to_column("filename")
+
+quant$filename <- gsub(" Peak area", "", quant$filename)
+```
+
+### Merge feature table and metadata for plotting
+
+```{r}
+data_merge <- md %>% dplyr::select("filename", "Sample_Name") %>% 
+  left_join(quant, by = "filename")
+
+
+
+```
+
+
+
+### Subset media blank and extraction blank
+
+```{r}
+data_merge <- data_merge %>% filter(Sample_Name != "Blank")
+
+```
+
+### Set level to plot
+
+```{r}
+data_merge$Sample_Name <- factor(data_merge$Sample_Name, levels = c("Lanthanum_chloride_added", "Lanthanum_oxide_added","No_lanthanum"))
+```
+
+
+```{r}
+
+data_merge $metallophore_normalized_to_ext_st <- data_merge $`6521` / data_merge $`1530`
+
+```
+
+```{r}
+data_6521_normalized <- data_merge %>%
+  select(filename, `metallophore_normalized_to_ext_st`)
+
+data_6521_normalized <- md %>% dplyr::select("filename", "Sample_Name") %>% 
+  left_join(data_6521_normalized, by = "filename")
+
+data_6521_normalized  <- data_6521_normalized  %>%
+  filter(!is.na(`metallophore_normalized_to_ext_st`) & trimws(as.character(`metallophore_normalized_to_ext_st`)) != "")
+
+```
+
+```{r}
+kruskal.test(`metallophore_normalized_to_ext_st` ~ Sample_Name, data = data_6521_normalized)
+
+```
+```{r}
+shapiro.test(data_6521_normalized$metallophore_normalized_to_ext_st)
+```
+```{r}
+anova_model <- aov(
+  metallophore_normalized_to_ext_st ~ Sample_Name,
+  data = data_6521_normalized
+)
+
+summary(anova_model)
+
+TukeyHSD(anova_model)
+```
+
+
+```{r}
+data_6521 <- data_merge %>%
+  select(filename, `6521`)
+
+data_6521 <- data_6521 %>%
+  filter(filename != "LaCl3_80_2.mzML")
+
+data_6521 <- md %>% dplyr::select("filename", "Sample_Name") %>% 
+  left_join(data_6521, by = "filename")
+
+data_6521  <- data_6521  %>%
+  filter(!is.na(`6521`) & trimws(as.character(`6521`)) != "")
+
+
+```
+
+
+```{r}
+
+data_6521_no_ox <- data_6521 %>%
+  filter(Sample_Name != "Lanthanum_oxide_added")
+
+data_6521_no_ox  <- data_6521_no_ox  %>%
+  filter(!is.na(`6521`) & trimws(as.character(`6521`)) != "")
+```
+
+
+```{r}
+kruskal.test(`6521` ~ Sample_Name, data = data_6521)
+
+```
+
+```{r}
+wilcox.test(`6521` ~ Sample_Name, data = data_6521_no_ox)
+```
+
+```{r}
+data_normalized <- data_merge %>%
+  select(filename, `metallophore_normalized_to_ext_st`)
+
+data_6521 <- md %>% dplyr::select("filename", "Sample_Name") %>% 
+  left_join(data_6521, by = "filename")
+
+data_6521  <- data_6521  %>%
+  filter(!is.na(`6521`) & trimws(as.character(`6521`)) != "")
+
+```
+
+
+```{r}
+
+
+
+```
+
+```{r}
+
+data_merge <- data_merge %>%
+  filter(Sample_Name != "Lanthanum_oxide_added")
+```
+
+
+```{r}
+metallophore_784mz <- data_merge %>%
+  tail(60) %>%
+  ggplot( aes(x= Sample_Name, y= `6521`)) +
+  geom_line(linetype = "dashed") +
+  geom_point(size= 3) +
+  theme_classic() + 
+  labs(y= "Peak area (AU)", x= expression(paste("")), shape ="")+
+  theme(axis.title.x = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.title.y = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.text.x = element_text(family = "sans", size = 16, color = "black", angle = 45, hjust =1), 
+        axis.text.y = element_text(family = "sans", size = 16, color= "black"),
+        axis.line=element_line(size =1),
+        axis.ticks=element_line(size=1), 
+        axis.ticks.length=unit(.25, "cm"),
+        legend.text=element_text(size=14,family="sans"))
+
+plot(metallophore_784mz)
+ggsave(file="metallophore_731_proton_adduct.png", plot=metallophore_784mz, width =4, height = 5 )
+```
+
+```{r}
+wilcox.test(metallophore_normalized_to_ext_st ~ Sample_Name, data = data_merge)
+```
+```{r}
+kruskal.test(metallophore_normalized_to_ext_st ~ Sample_Name, data = data_merge)
+```
+
+
+```{r}
+sulfamethazine <- data_merge %>%
+  tail(60) %>%
+  ggplot( aes(x= Sample_Name, y= `1530`)) +
+  geom_line(linetype = "dashed") +
+   scale_y_log10() +
+  geom_point(size= 3) +
+  theme_classic() + 
+  labs(y= "Peak Intensity (AU)", x= expression(paste("")), shape ="")+
+  theme(axis.title.x = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.title.y = element_text(family = "sans", size = 16, hjust = 0.5),  
+        axis.text.x = element_text(family = "sans", size = 16, color = "black", angle = 45, hjust =1), 
+        axis.text.y = element_text(family = "sans", size = 16, color= "black"),
+        axis.line=element_line(size =1),
+        axis.ticks=element_line(size=1), 
+        axis.ticks.length=unit(.25, "cm"),
+        legend.text=element_text(size=14,family="sans"))
+
+plot(sulfamethazine)
+ggsave(file="metallophore_731_proton_adduct.png", plot=metallophore_731mz, width =5, height = 5 )
+```
