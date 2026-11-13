@@ -1,0 +1,79 @@
+---
+title: "qPCR_statistics"
+output: html_document
+date: "2026-10-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+gene_expression <- read.csv("gene_expression.csv", header = T)
+```
+
+```{r}
+
+kruskal.test(
+  Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression, Target == "iucA")
+)
+
+kruskal.test(
+  Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression, Target == "TonB")
+)
+
+
+kruskal.test(
+  Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression, Target == "xoxF1")
+)
+```
+
+```{r}
+# Target 1: iucA
+shapiro.test(
+  subset(gene_expression, Target == "iucA")$Log_10_2_minus_dd_CT
+)
+
+# Target 2: tonB
+shapiro.test(
+  subset(gene_expression, Target == "TonB")$Log_10_2_minus_dd_CT
+)
+
+# Target 3: xoxF1
+shapiro.test(
+  subset(gene_expression, Target == "xoxF1")$Log_10_2_minus_dd_CT
+)
+
+```
+
+```{r}
+summary(aov(
+   Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression, Target == "TonB")
+))
+
+summary(aov(
+  Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression, Target == "xoxF1")
+))
+```
+
+```{r}
+gene_expression_no_ox <- subset(gene_expression, Sample != "La2O3")
+```
+
+
+
+
+```{r}
+wilcox.test(
+  Log_10_2_minus_dd_CT ~ Sample,
+  data = subset(gene_expression_no_ox, Target == "iucA"),
+  exact = FALSE
+)
+
+```
+
