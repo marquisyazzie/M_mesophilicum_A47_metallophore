@@ -1,0 +1,49 @@
+filename,Samples,Organism,Ln_III_Conc,Iron_Conc,Calcium_conc,Culture_OD,Sample_group,mL_supernatant_per_tube,Media,Media_notes,Methanol_conc,Notes,Culture_tubes,Replicate,ATTRIBUTE_Optical_Density_at_70_hours
+K1_80MeOH.mzML,K1,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,1,1,0.61
+K2_80MeOH.mzML,K2,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,1,2,0.7556
+K3_80MeOH.mzML,K3,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,1,3,0.8756
+K4_80MeOH.mzML,K4,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,2,1,0.3546
+K5_80MeOH.mzML,K5,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,2,2,0.19
+K6_80MeOH.mzML,K6,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,2,3,0.7987
+K7_80MeOH.mzML,K7,Methylobacterium Mesophilicum ,1 uM Nd(Cl)3,0,20 uM,,_+NdCl3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,3,1,0.3699
+K8_80MeOH.mzML,K8,Methylobacterium Mesophilicum ,1 uM Nd(Cl)3,0,20 uM,,_+NdCl3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,3,2,0.3898
+K9_80MeOH.mzML,K9,Methylobacterium Mesophilicum ,1 uM Nd(Cl)3,0,20 uM,,_+NdCl3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,3,3,0.4949
+K10_80MeOH.mzML,K10,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,20 uM,,_+Nd2O3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,4,1,0.5363
+K11_80MeOH.mzML,K11,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,20 uM,,_+Nd2O3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,4,2,0.4298
+K12_80MeOH.mzML,K12,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,20 uM,,_+Nd2O3_-Fe_+Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,4,3,0.5291
+K13_80MeOH.mzML,K13,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,0,,_+Nd2O3_-Fe_-Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,5,1,0.3735
+K14_80MeOH.mzML,K14,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,0,,_+Nd2O3_-Fe_-Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,5,2,0.5144
+K15_80MeOH.mzML,K15,Methylobacterium Mesophilicum ,1 uM Nd2O3,0,0,,_+Nd2O3_-Fe_-Ca,25,MP,MP_Prepared_in_glass,0.5,Grow in 50mL Falcon tubes ,5,3,0.7177
+K16_80MeOH.mzML,K16,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,6,1,0.6818
+K17_80MeOH.mzML,K17,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,6,2,0.6368
+K18_80MeOH.mzML,K18,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,6,3,0.5467
+K19_80MeOH.mzML,K19,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,7,1,0.4514
+K20_80MeOH.mzML,K20,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,7,2,0.3676
+K21_80MeOH.mzML,K21,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,MP,MP_Prepared_in_plastic,0.5,Grow in 50mL Falcon tubes ,7,3,0.3264
+K22_80MeOH.mzML,K22,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,8,1,0.4677
+K23_80MeOH.mzML,K23,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,8,2,0.5164
+K24_80MeOH.mzML,K24,Methylobacterium Mesophilicum,1 uM Nd(Cl)3,18 uM,20 uM,,_+NdCl3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,8,3,0.4385
+K25_80MeOH.mzML,K25,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,9,1,0.3047
+K26_80MeOH.mzML,K26,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,9,2,0.4892
+K27_80MeOH.mzML,K27,Methylobacterium Mesophilicum,1 uM Nd2O3,18 uM,20 uM,,_+Nd2O3_+Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,9,3,0.3397
+K28_80MeOH.mzML,K28,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,10,1,0.395
+K29_80MeOH.mzML,K29,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,10,2,0.3939
+K30_80MeOH.mzML,K30,Methylobacterium Mesophilicum ,0,0,0,,_-Nd_-Fe_-Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,10,3,0.3755
+K31_80MeOH.mzML,K31,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,11,1,0.3939
+K32_80MeOH.mzML,K32,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,11,2,0.3992
+K33_80MeOH.mzML,K33,Methylobacterium Mesophilicum ,0,0,20 uM,,_-Nd_-Fe_+Ca,25,1/2_Hypho,1/2 Hypho,0.2,Grow in 50mL Falcon tubes ,11,3,0.3596
+K1_Ext_blank.mzML,None,None,None,None,None,None,Extraction Blank,None,None,None,None,None,None,None,None
+K2_Ext_Blk.mzML,None,None,None,None,None,None,Extraction Blank,None,None,None,None,None,None,None,None
+Aerobactin_10_point_5_uM_80MeOH.mzML,None,None,None,None,None,None,Aerobactin standard,None,None,None,None,None,None,None,None
+method_blank_1_1.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_1_2.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_1_3.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_1_4.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_1_5.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_1_6.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_1.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_2.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_3.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_4.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_5.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
+method_blank_2_6.mzML,None,None,None,None,None,None,Method Blank,None,None,None,None,None,None,None,None
