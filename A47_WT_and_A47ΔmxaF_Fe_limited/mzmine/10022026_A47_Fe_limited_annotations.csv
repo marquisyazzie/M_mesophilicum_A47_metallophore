@@ -1,0 +1,8 @@
+id,compound_name,adduct,score,precursor_mz,ion_mobility,ccs,rt,mol_formula,smiles,isomeric_smiles,inchi,inchi_key,method,usi,entry_id,iupac_name,cas,internal_id,query_spectrum_usi
+132,Cer 7:3;O2/1:0,[M+H]+,0.717,170.0811696640909,,,,C8H11NO3,,,,,matchedlipid,,,,,,
+132,Cer 6:3;O2/2:0,[M+H]+,0.685,170.0811696640909,,,,C8H11NO3,,,,,matchedlipid,,,,,,
+132,Cer 8:3;O2,[M+H]+,0.708,170.0811696640909,,,,C8H11NO3,,,,,matchedlipid,,,,,,
+134,NAE 9:0,[M+H]+,0.638,202.18015542809093,,,,C11H23NO2,,,,,matchedlipid,,,,,,
+218,Cer 8:4;O3,[M+H]+,0.612,184.06043422009094,,,,C8H9NO4,,,,,matchedlipid,,,,,,
+2040,Cer 4:0;O2/12:0,[M+H]+,0.687,288.2533203680909,,,,C16H33NO3,,,,,matchedlipid,,,,,,
+2246,Cer 4:0;O2/12:0,[M+H]+,0.636,288.2533203680909,,,,C16H33NO3,,,,,matchedlipid,,,,,,
