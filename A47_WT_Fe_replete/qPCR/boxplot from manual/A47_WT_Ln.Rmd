@@ -1,0 +1,206 @@
+---
+title: "qPCR data"
+output: html_document
+date: "2026-10-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+data <- read.csv("qPCR_results_manual.csv", header =T)
+```
+
+```{r}
+data <- data %>%
+  mutate(
+    Target = factor(
+      Target,
+      levels = c("iucA", "TonB", "xoxF1", "mxaF")
+    ),
+    Sample = factor(
+      Sample,
+      levels = c("LaCl3", "La2O3", "No_La")
+    )
+  )
+```
+
+```{r}
+iucA_gene_expression <- subset(data, Target == "iucA")
+
+gene_expression_all <- subset(data, Target != "iucA")
+```
+
+```{r}
+iucA_gene_expression_plot <- ggplot(iucA_gene_expression, aes(
+  x = Target,
+  y = Two_delta_delta_ct,
+  fill = Sample
+)) +
+  geom_boxplot(
+    position = position_dodge(width = 0.8),
+    width = 0.7,
+    outlier.shape = NA,
+    alpha = 0.6
+  ) +
+  geom_point(
+    aes(color = Sample),
+    position = position_jitterdodge(
+      jitter.width = 0.1,
+      dodge.width = 0.8
+    ),
+    size = 2,
+    alpha = 0.7
+  ) +
+  geom_hline(
+    yintercept = 1,
+    linetype = "dotted",
+    color = "black",
+    linewidth = 0.8
+  ) +
+  scale_y_continuous(trans = "log2") +
+  theme_classic() +
+  labs(
+    x = "",
+    y = "Relative Gene Expression (2^-ΔΔCt)",
+    fill = "Sample",
+    color = "Sample"
+  ) +
+  theme(
+    axis.text = element_text(size = 14, color = "black"),
+    axis.title = element_text(size = 16),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+
+plot(iucA_gene_expression_plot)
+
+ggsave(
+  filename = "iucA_gene_expression.svg",
+  plot = iucA_gene_expression_plot,
+  width = 4,
+  height = 4,
+  units = "in",
+  dpi = 300
+)
+```
+
+```{r}
+gene_expression_all_plot <- ggplot(gene_expression_all, aes(
+  x = Target,
+  y = Two_delta_delta_ct,
+  fill = Sample
+)) +
+  geom_boxplot(
+    position = position_dodge(width = 0.8),
+    width = 0.7,
+    outlier.shape = NA,
+    alpha = 0.6
+  ) +
+  geom_point(
+    aes(color = Sample),
+    position = position_jitterdodge(
+      jitter.width = 0.1,
+      dodge.width = 0.8
+    ),
+    size = 2,
+    alpha = 0.7
+  ) +
+  geom_hline(
+    yintercept = 1,
+    linetype = "dotted",
+    color = "black",
+    linewidth = 0.8
+  ) +
+  scale_y_continuous(trans = "log2") +
+  theme_classic() +
+  labs(
+    x = "",
+    y = "Relative Gene Expression (2^-ΔΔCt)",
+    fill = "Sample",
+    color = "Sample"
+  ) +
+  theme(
+    axis.text = element_text(size = 14, color = "black"),
+    axis.title = element_text(size = 16),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+
+plot(gene_expression_all_plot)
+
+ggsave(
+  filename = "gene_expression_all.svg",
+  plot = gene_expression_all_plot,
+  width = 5,
+  height = 4,
+  units = "in",
+  dpi = 300
+)
+```
+
+
+```{r}
+gene_expression <- ggplot(data, aes(
+  x = Target,
+  y = Two_delta_delta_ct,
+  fill = Sample
+)) +
+  geom_boxplot(
+    position = position_dodge(width = 0.8),
+    width = 0.7,
+    outlier.shape = NA,
+    alpha = 0.6
+  ) +
+  geom_point(
+    aes(color = Sample),
+    position = position_jitterdodge(
+      jitter.width = 0.1,
+      dodge.width = 0.8
+    ),
+    size = 2,
+    alpha = 0.7
+  ) +
+  geom_hline(
+    yintercept = 1,
+    linetype = "dotted",
+    color = "black",
+    linewidth = 0.8
+  ) +
+  scale_y_continuous(trans = "log2") +
+  theme_classic() +
+  labs(
+    x = "",
+    y = "Relative Gene Expression (2^-ΔΔCt)",
+    fill = "Sample",
+    color = "Sample"
+  ) +
+  theme(
+    axis.text = element_text(size = 14, color = "black"),
+    axis.title = element_text(size = 16),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+
+plot(gene_expression)
+```
+
+
+
+```{r}
+ggsave(
+  filename = "gene_expression.svg",
+  plot = gene_expression,
+  width = 6,
+  height = 4,
+  units = "in",
+  dpi = 300
+)
+```
+
