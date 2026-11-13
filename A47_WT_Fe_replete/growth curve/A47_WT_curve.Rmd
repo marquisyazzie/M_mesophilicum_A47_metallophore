@@ -1,0 +1,125 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-08-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+setwd("C:/Users/Marquis.Yazzie/OneDrive - University of Denver/Desktop/DU Research/Lanthanide_binding_project/03022026_calcium_limitation_wt_A47/growth_curve")
+```
+
+```{r}
+library(ggplot2)
+library(stringr)
+library(data.table)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(reshape)     
+library(gplots)
+library(pheatmap)
+library(heatmap3)
+library(magrittr) 
+library(tibble) 
+library(RColorBrewer)
+library(paletteer)
+library(clr)
+library(tidyverse) #used for data science. The eight core packages inside this library are: ggplot2 (data visualisation), dplyr (data manipulation), tidyr, readr, purrr, tibble, stringr, and forcats
+library(KODAMA) # to use the normalisation function
+library(ggrepel) #mainly used to repel overlapping text labels in ggplots
+library(vegan) #popular library for analysing ecological diversity and for multivariate analysis of community data. Here, we use it for PCoA
+library(svglite) #to save the plots in support vector graphics (svg) format
+library(factoextra) #for extracting and visualizing outputs of multivariate analyses such as PCA, k-means
+library(ggsci) #provides color palettes for ggplot2 that can be used for scientific journals
+library(matrixStats) #contains highly optimized functions to perform statistics on matrix data
+library(cowplot) #efficient functions to arrange several plots
+```
+
+```{r}
+growth <- read.csv("OD.csv", header=T, check.names=F)
+
+```
+
+
+```{r}
+summary_stats <- growth %>%
+  group_by(Time_h, Sample_name) %>%
+  summarise(
+    mean_OD = mean(OD_full, na.rm = TRUE),
+    sd_OD = sd(OD_full, na.rm = TRUE)
+  )
+
+
+```
+```{r}
+dodge <- position_dodge(width = 1.5)
+
+plot <- ggplot(
+  summary_stats,
+  aes(
+    x = Time_h,
+    y = mean_OD,
+    shape = Sample_name,
+    group = Sample_name
+  )
+) +
+  geom_point(
+    size = 4,
+    position = dodge
+  ) +
+  geom_errorbar(
+    aes(
+      ymin = mean_OD - sd_OD,
+      ymax = mean_OD + sd_OD
+    ),
+    width = 0.5,
+    position = dodge
+  ) +
+  geom_line(
+    linetype = "dashed"
+  ) +
+  theme_classic() +
+  labs(
+    y = "Optical Density (600 nm)",
+    x = "Time (h)",
+    shape = "Condition"
+  ) +
+  theme(
+    axis.title.x = element_text(
+      family = "sans", size = 16
+    ),
+    axis.title.y = element_text(
+      family = "sans", size = 16
+    ),
+    axis.text.x = element_text(
+      family = "sans", size = 16, color = "black"
+    ),
+    axis.text.y = element_text(
+      family = "sans", size = 16, color = "black"
+    ),
+    axis.line = element_line(linewidth = 1),
+    axis.ticks = element_line(linewidth = 1),
+    axis.ticks.length = unit(0.25, "cm"),
+    legend.text = element_text(
+      size = 14, family = "sans"
+    ),
+    legend.title = element_text(size = 14)
+  )
+
+plot
+
+ggsave(
+  "growth_curve_WT.svg",
+  plot = plot,
+  width = 6,
+  height = 5,
+  dpi = 300
+)
+```
+
