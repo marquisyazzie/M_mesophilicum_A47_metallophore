@@ -1,0 +1,7 @@
+id,compound_name,adduct,score,precursor_mz,ion_mobility,ccs,rt,mol_formula,smiles,inchi,inchi_key,method,usi,entry_id,iupac_name,cas,internal_id,query_spectrum_usi
+6636,LPC 18:1,[M+H]+,0.748,522.3554160860909,,,,C26H52NO7P,,,,matchedlipid,,,,,,
+6687,LPC 18:1,[M+H]+,0.763,522.3554160860909,,,,C26H52NO7P,,,,matchedlipid,,,,,,
+6738,PC 34:1,[M+H]+,0.683,760.585081666091,,,,C42H82NO8P,,,,matchedlipid,,,,,,
+6740,PC 36:2,[M+H]+,0.732,786.600731730091,,,,C44H84NO8P,,,,matchedlipid,,,,,,
+6983,PC 36:2,[M+H]+,0.732,786.600731730091,,,,C44H84NO8P,,,,matchedlipid,,,,,,
+6971,PC 34:1,[M+H]+,0.728,760.585081666091,,,,C42H82NO8P,,,,matchedlipid,,,,,,
