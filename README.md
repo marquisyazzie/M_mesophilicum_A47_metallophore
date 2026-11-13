@@ -1,0 +1,1 @@
+# M_mesophilicum_A47_metallophore
